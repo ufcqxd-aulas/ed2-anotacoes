@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Caso você faça uso deste material, por favor, cite-o usando os seguintes dados."
+title: "Anotações sobre Estruturas de Dados II"
+abstract: "Anotações contendo informações, descrições, explicações ou material extra ou bem detalhado sobre o conteúdo da disciplina QXD0115 do Campus de Quixadá da Universidade Federal do Ceará."
+authors:
+  - family-names: Rodrigues Araruna
+    given-names: Arthur
+    orcid: https://orcid.org/0000-0002-4324-8810
+contact:
+  - family-names: Rodrigues Araruna
+    given-names: Arthur
+    affiliation: "Universidade Federal do Ceará"
+    email: araruna@ufc.br
+license: CC-BY-SA-4.0
+repository-code: "https://github.com/ufcqxd-aulas/ed2-anotacoes"
+keywords:
+  - "Estruturas de Dados"
+  - "Notas de Aulas"
+  - "Material Complementar"
+  - "Data Structures"
+  - "Lecture Notes"
+  - "Complementary Material"
