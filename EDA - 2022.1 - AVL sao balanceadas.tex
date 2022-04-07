@@ -1,0 +1,134 @@
+\documentclass[10pt,a4paper,twoside]{article}
+
+\usepackage{soul}
+
+\usepackage{kpfonts}
+\usepackage[T1]{fontenc}
+
+\usepackage{a4wide}
+    \setlength{\headheight}{12.5pt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english,brazil]{babel}
+\usepackage{tabularx}
+
+	\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{hhline}
+\usepackage{booktabs}
+\usepackage[inline]{enumitem}
+\usepackage{mathtools}
+
+	\newcommand{\Binary}{\ensuremath{\mathbb{B}}}
+	\newcommand{\Natural}{\ensuremath{\mathbb{N}}}
+	\newcommand{\Integer}{\ensuremath{\mathbb{Z}}}
+	\newcommand{\Rational}{\ensuremath{\mathbb{Q}}}
+	\newcommand{\Real}{\ensuremath{\mathbb{R}}}
+	
+	\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+	\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+	\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+	
+\usepackage{amsthm}
+	
+	\theoremstyle{definition}
+	\newtheorem{definition}{Definição}[section]
+
+\usepackage{multicol}
+	\newcommand{\finishcols}{\vfill\vphantom{.}}
+
+\usepackage[portuguese,algoruled,vlined,noend]{algorithm2e}
+
+	\SetKwInput{Algoritmo}{Algoritmo}
+	\SetKw{Retorne}{retorne}
+	\SetKwFor{Para}{para}{faça}{fimpara}
+	\SetKw{Escreva}{escreva}
+	\DontPrintSemicolon
+
+\usepackage[brazil]{varioref}
+\usepackage[brazilian]{cleveref}
+
+	\def\disciplinacodigotext{QXD0115}
+	\def\disciplinanometext{Estrutura de Dados Avançada}
+	\def\semestretext{2022.1}
+	\def\provatype{Notas de Aula}
+	\def\provatitle{Árvores AVL são balanceadas}
+	\def\provatext{\provatype{} \ifx\provatype\empty {} \else {--} \fi \provatitle{}}
+	\def\provacodtext{}
+	\def\professorabbrv{Prof.}
+	\def\professornometext{Arthur Araruna}
+
+\usepackage{fancyhdr}
+
+	\pagestyle{fancy}
+	\fancyhead{}
+	\lhead{\disciplinacodigotext}
+	\chead{\provatext}
+	\rhead{\semestretext}
+	\fancyfoot{}
+	\fancyfoot[LE,RO]{página \thepage}
+
+\begin{document}
+\noindent
+\begin{minipage}{\textwidth}
+	\begin{tabularx}{\textwidth}{cXc}
+	\multirow{4}{*}{\includegraphics[height=1.8cm]{brasaoufc.pdf}} & {\bf UNIVERSIDADE FEDERAL DO CEARÁ} & \multirow{3}{*}{} \\
+	& {\bf Campus de Quixadá} & \\
+	& \professorabbrv\enspace\professornometext & \\
+	& \disciplinacodigotext - \disciplinanometext & {} \\
+	\end{tabularx}
+\end{minipage}
+
+\bigskip
+\bigskip
+
+\part*{\provatitle}
+\section{Conceitos}
+
+Vamos relembrar o nossos conceitos que serão necessários para o resultado a ser demonstrado:
+
+\begin{definition}
+    Uma árvore binária \( T \) tal que \( h(T) = O(\lg n) \) é dita \emph{balanceada}.
+\end{definition}
+
+\begin{definition}
+    O \emph{balanço} de um nó binário \( n \) é definido pela função \( bal(n) \coloneqq h(n.dir) - h(n.esq) \).
+\end{definition}
+
+\begin{definition}
+    Uma árvore binária \( T \) é \emph{AVL} quando, para todo nó \( n \in T \), \( \abs{bal(n)} \leq 1 \).
+\end{definition}
+
+\section{Demonstração}
+
+Note que devemos mostrar que \( h \leq c \cdot \lg n \) para algum \( c > 0 \), com \( h \) sendo a altura de uma árvore AVL \ul{qualquer} e \( n \) sendo seu tamanho. Entretanto, nossa estratégia será um pouco mais restrita, mas permitirá concluirmos a mesma coisa.
+
+Em vez de analisarmos uma árvore qualquer, vamos observar, para um dado \( h \) arbitrário, uma árvore AVL com altura \( h \) que contenha o mínimo possível de nós. Se essa árvore respeitar a desigualdade anterior, poderemos concluir que \emph{todas} as AVL com essa mesma altura também a respeitarão (já que para essa tal árvore o lado direito da desigualdade é o menor possível, todas as outras apresentarão valores ainda maiores, o que mantém a desigualdade).
+
+\subsection{Estrutura da árvore}
+% TODO: Reescrever. Ficou um pouco confuso por ter uma sentença muito grande e misturar "árvore anterior" e "sub-árvore anterior"...
+Para entendermos como construir uma árvore como desejamos, veja que sempre que, em uma árvore AVL \( T \) com altura \( h \), encontrarmos um nó \( n \) com \( bal(n) = 0 \), poderíamos substituir uma de suas sub-árvores por outra AVL com uma altura 1 unidade menor que a que foi retirada sem invalidar a propriedade AVL de \( T \). Isso constrói uma nova árvore \( T^\prime \) com a mesma altura que a anterior \( T \) e certamente tamanho menor. Dessa forma, podemos concluir que a árvore desejada não pode ter nenhum nó com balanço nulo.
+
+\subsection{Contagem de nós da árvore}
+Vamos definir a função \( N(h) \) de forma a representar o menor número de nós possível para uma árvore AVL de altura \( h \), que chamaremos de \( T \).
+
+Como vimos anteriormente, as sub-árvores de \( T \) devem possuir alturas \( h-1 \) e \( h-2 \), não necessariamente nesta ordem. Além disso, podemos afirmar que ambas se tratam de árvores AVL com o mínimo de nós para a respectiva altura, caso contrário não faria sentido \( T \) possuir tamanho mínimo (já que elas poderiam ser trocadas por outras árvores de mesma altura e menos nós).
+
+Dessa forma, podemos afirmar que o valor de \( N(h) \) pode ser calculado como \[ N(h) = \begin{cases}
+    N(h-1) + N(h-2) + 1, & \text{se } h \geq 2; \\
+    1                  , & \text{se } h = 1; \\
+    0                  , & \text{se } h = 0.
+\end{cases} \]
+
+Veja que existe uma enorme semelhança entre a função \( N \) e a função \( F \) a seguir, que define a \emph{Sequência de Fibonacci}: \[ F(h) = \begin{cases}
+    F(h-1) + F(h-2) , & \text{se } h \geq 2; \\
+    1               , & \text{se } h = 1; \\
+    0               , & \text{se } h = 0.
+\end{cases} \]
+
+De fato, para qualquer valor de \( h \), é o caso que \( N(h) \geq F(h) \). Vamos usar a fórmula fechada \( f(h) \) para essa sequência para obtermos uma relação entre \( h \) e o número de nós \( N(h) \) da árvore, que denotaremos simplesmente por \( n \). \[ f(h) = \dots \]
+
+\end{document}
