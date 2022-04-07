@@ -1,6 +1,7 @@
 \documentclass[10pt,a4paper,twoside]{article}
 
 \usepackage{soul}
+\usepackage{xcolor}
 
 \usepackage{kpfonts}
 \usepackage[T1]{fontenc}
@@ -48,6 +49,7 @@
 	\SetKw{Escreva}{escreva}
 	\DontPrintSemicolon
 
+\usepackage{hyperref}
 \usepackage[brazil]{varioref}
 \usepackage[brazilian]{cleveref}
 
@@ -69,7 +71,7 @@
 	\chead{\provatext}
 	\rhead{\semestretext}
 	\fancyfoot{}
-	\fancyfoot[LE,RO]{página \thepage}
+	\fancyfoot[LE,RO]{\colorbox{black!20}{\thepage}}
 
 \begin{document}
 \noindent
@@ -104,6 +106,7 @@ Vamos relembrar o nossos conceitos que serão necessários para o resultado a se
 
 \section{Demonstração}
 
+% TODO: Reescrever, pois não é exatamente a forma que encontramos no final.
 Note que devemos mostrar que \( h \leq c \cdot \lg n \) para algum \( c > 0 \), com \( h \) sendo a altura de uma árvore AVL \ul{qualquer} e \( n \) sendo seu tamanho. Entretanto, nossa estratégia será um pouco mais restrita, mas permitirá concluirmos a mesma coisa.
 
 Em vez de analisarmos uma árvore qualquer, vamos observar, para um dado \( h \) arbitrário, uma árvore AVL com altura \( h \) que contenha o mínimo possível de nós. Se essa árvore respeitar a desigualdade anterior, poderemos concluir que \emph{todas} as AVL com essa mesma altura também a respeitarão (já que para essa tal árvore o lado direito da desigualdade é o menor possível, todas as outras apresentarão valores ainda maiores, o que mantém a desigualdade).
@@ -129,6 +132,21 @@ Veja que existe uma enorme semelhança entre a função \( N \) e a função \( 
     0               , & \text{se } h = 0.
 \end{cases} \]
 
-De fato, para qualquer valor de \( h \), é o caso que \( N(h) \geq F(h) \). Vamos usar a fórmula fechada \( f(h) \) para essa sequência para obtermos uma relação entre \( h \) e o número de nós \( N(h) \) da árvore, que denotaremos simplesmente por \( n \). \[ f(h) = \dots \]
+De fato, para qualquer valor de \( h \), é o caso que \( N(h) \geq F(h) \). Vamos usar o valor \( f_h \) do \( h \)-ésimo termo dessa sequência para obtermos uma relação entre \( h \) e o número de nós \( N(h) \) da árvore, que denotaremos simplesmente por \( n \). Podemos calcular esse termo de forma não-recursiva como\footnote{Veja \url{https://pt.wikipedia.org/wiki/Sequência_de_Fibonacci\#Fórmula_explícita}} \[ f_h = \frac{1}{\sqrt{5}}\left( \frac{1 + \sqrt{5}}{2} \right)^h - \frac{1}{\sqrt{5}}\left( \frac{1 - \sqrt{5}}{2} \right)^h. \]
+
+Como \( h > 0 \), podemos concluir\footnote{Ver apêndice para a argumentação mais detalhada.} que \[ \frac{1}{\sqrt{5}}\left( \frac{1 - \sqrt{5}}{2} \right)^h \leq 1 \implies f_h \geq \frac{1}{\sqrt{5}}\left( \frac{1 + \sqrt{5}}{2} \right)^h - 1. \]
+
+\section{Conclusão}
+Daí, considerando \( a = \frac{1 + \sqrt{5}}{2} \) e lembrando que \( n = N(h) \geq F(h) = f_h \), podemos, ao reescrever a desigualdade anterior, concluir que
+\begin{eqnarray*} 
+	n \geq f_h \geq& \displaystyle\frac{1}{\sqrt{5}} a^h - 1 & \implies \\
+	n + 1 \geq& \displaystyle\frac{1}{\sqrt{5}} a^h & \implies \\
+	\log_a (n + 1) \geq& h - \log_a \sqrt{5} & \implies \\
+	\log_a (n + 1) + \log_a \sqrt{5} \geq& h.
+\end{eqnarray*}
+
+Isso significa que \( h \leq \log_a (n + 1) + \log_a \sqrt{5} = O(\lg n) \), como desejávamos.
+
+\part*{Apêndice}
 
 \end{document}
