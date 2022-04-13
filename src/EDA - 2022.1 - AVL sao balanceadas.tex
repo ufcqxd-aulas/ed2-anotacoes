@@ -5,12 +5,13 @@
 \usepackage{csquotes}
 
 \usepackage[
-	backend=biber,
-	style=abnt,
-	language=auto,
+  backend=biber,
+  style=abnt,
+  language=auto,
 ]{biblatex}
 
-\addbibresource{../refs/referencias.bib}
+  \addbibresource{../refs/referencias.bib}
+
 \usepackage{soul}
 \usepackage{xcolor}
 \usepackage{framed}
@@ -19,11 +20,12 @@
 \usepackage[T1]{fontenc}
 
 \usepackage{a4wide}
-    \setlength{\headheight}{12.5pt}
+
+  \setlength{\headheight}{12.5pt}
 
 \usepackage{tabularx}
 
-	\newcolumntype{C}{>{\centering\arraybackslash}X}
+  \newcolumntype{C}{>{\centering\arraybackslash}X}
 
 \usepackage{graphicx}
 \usepackage{multirow}
@@ -33,56 +35,57 @@
 \usepackage[inline]{enumitem}
 \usepackage{mathtools}
 
-	\newcommand{\Binary}{\ensuremath{\mathbb{B}}}
-	\newcommand{\Natural}{\ensuremath{\mathbb{N}}}
-	\newcommand{\Integer}{\ensuremath{\mathbb{Z}}}
-	\newcommand{\Rational}{\ensuremath{\mathbb{Q}}}
-	\newcommand{\Real}{\ensuremath{\mathbb{R}}}
-	
-	\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
-	\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
-	\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
-	
+\newcommand{\Binary}{\ensuremath{\mathbb{B}}}
+\newcommand{\Natural}{\ensuremath{\mathbb{N}}}
+\newcommand{\Integer}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Rational}{\ensuremath{\mathbb{Q}}}
+\newcommand{\Real}{\ensuremath{\mathbb{R}}}
+
+  \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+  \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+  \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+
 \usepackage{amsthm}
-	
-	\newtheorem{proposition}{Proposição}[section]
-	\theoremstyle{definition}
-	\newtheorem{definition}{Definição}[section]
+
+  \newtheorem{proposition}{Proposição}[section]
+  \theoremstyle{definition}
+  \newtheorem{definition}{Definição}[section]
 
 \usepackage{multicol}
-	\newcommand{\finishcols}{\vfill\vphantom{.}}
+
+  \newcommand{\finishcols}{\vfill\vphantom{.}}
 
 \usepackage[portuguese,algoruled,vlined,noend]{algorithm2e}
 
-	\SetKwInput{Algoritmo}{Algoritmo}
-	\SetKw{Retorne}{retorne}
-	\SetKwFor{Para}{para}{faça}{fimpara}
-	\SetKw{Escreva}{escreva}
-	\DontPrintSemicolon
+  \SetKwInput{Algoritmo}{Algoritmo}
+  \SetKw{Retorne}{retorne}
+  \SetKwFor{Para}{para}{faça}{fimpara}
+  \SetKw{Escreva}{escreva}
+  \DontPrintSemicolon
 
 \usepackage{hyperref}
 \usepackage[brazil]{varioref}
 \usepackage[brazilian]{cleveref}
 
-	\def\disciplinacodigotext{QXD0115}
-	\def\disciplinanometext{Estrutura de Dados Avançada}
-	\def\semestretext{2022.1}
-	\def\provatype{Notas de Aula}
-	\def\provatitle{Árvores AVL são balanceadas}
-	\def\provatext{\provatype{} \ifx\provatype\empty {} \else {--} \fi \provatitle{}}
-	\def\provacodtext{}
-	\def\professorabbrv{Prof.}
-	\def\professornometext{Arthur Araruna}
+  \def\disciplinacodigotext{QXD0115}
+  \def\disciplinanometext{Estrutura de Dados Avançada}
+  \def\semestretext{2022.1}
+  \def\provatype{Notas de Aula}
+  \def\provatitle{Árvores AVL são balanceadas}
+  \def\provatext{\provatype{} \ifx\provatype\empty {} \else {--} \fi \provatitle{}}
+  \def\provacodtext{}
+  \def\professorabbrv{Prof.}
+  \def\professornometext{Arthur Araruna}
 
 \usepackage{fancyhdr}
 
-	\pagestyle{fancy}
-	\fancyhead{}
-	\lhead{\disciplinacodigotext}
-	\chead{\provatext}
-	\rhead{\semestretext}
-	\fancyfoot{}
-	\fancyfoot[LE,RO]{\colorbox{black!20}{\thepage}}
+  \pagestyle{fancy}
+  \fancyhead{}
+  \lhead{\disciplinacodigotext}
+  \chead{\provatext}
+  \rhead{\semestretext}
+  \fancyfoot{}
+  \fancyfoot[LE,RO]{\colorbox{black!20}{\thepage}}
 
 \begin{document}
 \noindent
