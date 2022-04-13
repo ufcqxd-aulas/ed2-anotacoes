@@ -1,5 +1,4 @@
 defaultIndent: '  '
-removeTrailingWhitespace: 1
 lookForAlignDelims:
   tabular:
     multiColumnGrouping: 1
@@ -22,6 +21,9 @@ lookForAlignDelims:
     alignFinalDoubleBackSlash: 1
     delimiterJustification: right
 indentAfterHeadings:
+  part:
+    indentAfterThisHeading: 1
+    level: 0
   chapter:
     indentAfterThisHeading: 1
     level: 1
@@ -34,3 +36,5 @@ indentAfterHeadings:
   paragraph:
     indentAfterThisHeading: 1
     level: 3
+noAdditionalIndent:
+  document: 0
