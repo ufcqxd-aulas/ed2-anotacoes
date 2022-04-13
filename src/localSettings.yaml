@@ -1,0 +1,36 @@
+defaultIndent: '  '
+removeTrailingWhitespace: 1
+lookForAlignDelims:
+  tabular:
+    multiColumnGrouping: 1
+    alignFinalDoubleBackSlash: 1
+    delimiterJustification: right
+  tabularx:
+    multiColumnGrouping: 1
+    alignFinalDoubleBackSlash: 1
+    delimiterJustification: right
+  array:
+    multiColumnGrouping: 1
+    alignFinalDoubleBackSlash: 1
+    delimiterJustification: right
+  matrix:
+    multiColumnGrouping: 1
+    alignFinalDoubleBackSlash: 1
+    delimiterJustification: right
+  cases:
+    multiColumnGrouping: 1
+    alignFinalDoubleBackSlash: 1
+    delimiterJustification: right
+indentAfterHeadings:
+  chapter:
+    indentAfterThisHeading: 1
+    level: 1
+  section:
+    indentAfterThisHeading: 1
+    level: 2
+  subsection:
+    indentAfterThisHeading: 1
+    level: 2
+  paragraph:
+    indentAfterThisHeading: 1
+    level: 3
