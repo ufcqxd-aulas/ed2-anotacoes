@@ -16,6 +16,10 @@
 \usepackage{xcolor}
 \usepackage{framed}
 
+\usepackage{tikz}
+
+\usetikzlibrary{shapes.geometric}
+
 \usepackage{kpfonts}
 \usepackage[T1]{fontenc}
 
@@ -147,6 +151,12 @@
         \caption{\label{fig:troca-sarv}}
         \centering
         \begin{tikzpicture}[transform shape, scale=.9, nodes={draw, circle, minimum width=3.5ex}, sibling distance=5.5em, level distance=6ex]
+          \draw node [label=south:{\( 0 \)}] {\( n \)}
+          child [child anchor=apex] { node [draw,isosceles triangle,shape border rotate=90,anchor=apex] (to replace) {\( n.esq \)}}
+          child [child anchor=apex] { node [draw,isosceles triangle,shape border rotate=90,anchor=apex] {\( n.dir \)}}
+          ;
+
+          \node [right of=to replace] {\( \Rightarrow \)};
         \end{tikzpicture}
       \end{figure}
 
