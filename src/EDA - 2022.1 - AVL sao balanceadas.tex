@@ -33,6 +33,7 @@
 \usepackage{hhline}
 \usepackage{booktabs}
 \usepackage[inline]{enumitem}
+\usepackage{xfrac}
 \usepackage{mathtools}
 
 \newcommand{\Binary}{\ensuremath{\mathbb{B}}}
@@ -88,80 +89,80 @@
   \fancyfoot[LE,RO]{\colorbox{black!20}{\thepage}}
 
 \begin{document}
-\noindent
-\begin{minipage}{\textwidth}
-	\begin{tabularx}{\textwidth}{cXc}
-		\multirow{4}{*}{\includegraphics[height=1.8cm]{brasaoufc.pdf}} & {\bf UNIVERSIDADE FEDERAL DO CEARÁ}         & \multirow{3}{*}{} \\
-		                                                               & {\bf Campus de Quixadá}                     &                   \\
-		                                                               & \professorabbrv\enspace\professornometext   &                   \\
-		                                                               & \disciplinacodigotext - \disciplinanometext & {}                \\
-	\end{tabularx}
-\end{minipage}
+  \noindent
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{cXc}
+      \multirow{4}{*}{\includegraphics[height=1.8cm]{brasaoufc.pdf}} & {\bf UNIVERSIDADE FEDERAL DO CEARÁ}         & \multirow{3}{*}{} \\
+                                                                     & {\bf Campus de Quixadá}                     &                   \\
+                                                                     & \professorabbrv\enspace\professornometext   &                   \\
+                                                                     & \disciplinacodigotext - \disciplinanometext & {}                \\
+    \end{tabularx}
+  \end{minipage}
 
-\bigskip
-\bigskip
+  \bigskip
+  \bigskip
 
-\part*{\provatitle}
+  \part*{\provatitle}
 
-\section{Conceitos}
+    \section{Conceitos}
 
-Vamos relembrar o nossos conceitos que serão necessários para o resultado a ser demonstrado:
+     Vamos relembrar o nossos conceitos que serão necessários para o resultado a ser demonstrado:
 
-\begin{definition}
-	Uma árvore binária \( T \), com \( n \) nós, tal que \( h(T) = O(\lg n) \) é dita \emph{balanceada}.
-\end{definition}
+     \begin{definition}
+       Uma árvore binária \( T \), com \( n \) nós, tal que \( h(T) = O(\lg n) \) é dita \emph{balanceada}.
+     \end{definition}
 
-\begin{definition}
-    O \emph{balanço} de um nó binário \( n \) é definido pela função \( bal(n) \coloneqq h(n.dir) - h(n.esq) \).
-\end{definition}
+     \begin{definition}
+       O \emph{balanço} de um nó binário \( n \) é definido pela função \( bal(n) \coloneqq h(n.dir) - h(n.esq) \).
+     \end{definition}
 
-\begin{definition}
-    Uma árvore binária \( T \) é \emph{AVL} quando, para todo nó \( n \in T \), \( \abs{bal(n)} \leq 1 \).
-\end{definition}
+     \begin{definition}
+       Uma árvore binária \( T \) é \emph{AVL} quando, para todo nó \( n \in T \), \( \abs{bal(n)} \leq 1 \).
+     \end{definition}
 
-\section{Demonstração}
+    \section{Demonstração}
 
-% TODO: Reescrever, pois não é exatamente a forma que encontramos no final.
-Note que devemos mostrar que \( h \leq c \cdot \lg n \) para algum \( c > 0 \), com \( h \) sendo a altura de uma árvore AVL \ul{qualquer} e \( n \) sendo seu tamanho. Entretanto, nossa estratégia será um pouco mais restrita, mas permitirá concluirmos a mesma coisa.
+     \begin{framed}
+       {\bfseries Observação:}
 
-Em vez de analisarmos uma árvore qualquer, vamos observar, para um dado \( h \) arbitrário, uma árvore AVL com altura \( h \) que contenha o mínimo possível de nós. Se essa árvore respeitar a desigualdade anterior, poderemos concluir que \emph{todas} as AVL com essa mesma altura também a respeitarão (já que para essa tal árvore o lado direito da desigualdade é o menor possível, todas as outras apresentarão valores ainda maiores, o que mantém a desigualdade).
+       A argumentação abaixo não é baseada na que consta em~\textcite{Szwarcfiter2010} pois uma das afirmações dadas como válidas não é de fácil demonstração.
+     \end{framed}
 
-\subsection{Estrutura da árvore}
-% TODO: Reescrever. Ficou um pouco confuso por ter uma sentença muito grande e misturar "árvore anterior" e "sub-árvore anterior"...
-Para entendermos como construir uma árvore como desejamos, veja que sempre que, em uma árvore AVL \( T \) com altura \( h \), encontrarmos um nó \( n \) com \( bal(n) = 0 \), poderíamos substituir uma de suas sub-árvores por outra AVL com uma altura 1 unidade menor que a que foi retirada sem invalidar a propriedade AVL de \( T \). Isso constrói uma nova árvore \( T^\prime \) com a mesma altura que a anterior \( T \) e certamente tamanho menor. Dessa forma, podemos concluir que a árvore desejada não pode ter nenhum nó com balanço nulo.
+     % TODO: Reescrever, pois não é exatamente a forma que encontramos no final.
+     Note que devemos mostrar que \( h \leq c \cdot \lg n \) para algum \( c > 0 \), com \( h \) sendo a altura de uma árvore AVL \ul{qualquer} e \( n \) sendo seu tamanho. Entretanto, nossa estratégia será um pouco mais restrita, mas permitirá concluirmos a mesma coisa.
 
-\subsection{Contagem de nós da árvore}
-Vamos definir a função \( N(h) \) de forma a representar o menor número de nós possível para uma árvore AVL de altura \( h \), que chamaremos de \( T \).
+     Em vez de analisarmos uma árvore qualquer, vamos observar, para um dado \( h \) arbitrário, uma árvore AVL com altura \( h \) que contenha o mínimo possível de nós. Se essa árvore respeitar a desigualdade anterior, poderemos concluir que \emph{todas} as AVL com essa mesma altura também a respeitarão (já que para essa tal árvore o lado direito da desigualdade é o menor possível, todas as outras apresentarão valores ainda maiores, o que mantém a desigualdade).
 
-Como vimos anteriormente, as sub-árvores de \( T \) devem possuir alturas \( h-1 \) e \( h-2 \), não necessariamente nesta ordem. Além disso, podemos afirmar que ambas se tratam de árvores AVL com o mínimo de nós para a respectiva altura, caso contrário não faria sentido \( T \) possuir tamanho mínimo (já que elas poderiam ser trocadas por outras árvores de mesma altura e menos nós).
+    \subsection{Estrutura da árvore}
+      % TODO: Reescrever. Ficou um pouco confuso por ter uma sentença muito grande e misturar "árvore anterior" e "sub-árvore anterior"...
+      Para entendermos como construir uma árvore como desejamos, veja que sempre que, em uma árvore AVL \( T \) com altura \( h \), encontrarmos um nó \( n \) com \( bal(n) = 0 \), poderíamos substituir uma de suas sub-árvores por outra AVL com uma altura 1 unidade menor que a que foi retirada sem invalidar a propriedade AVL de \( T \). Isso constrói uma nova árvore \( T^\prime \) com a mesma altura que a anterior \( T \) e certamente tamanho menor. Dessa forma, podemos concluir que a árvore desejada não pode ter nenhum nó com balanço nulo.
 
-Dessa forma, podemos afirmar que o valor de \( N(h) \) pode ser calculado como \[ N(h) = \begin{cases}
-    N(h-1) + N(h-2) + 1, & \text{se } h \geq 2; \\
-    1                  , & \text{se } h = 1; \\
-    0                  , & \text{se } h = 0.
-\end{cases} \]
+    \subsection{Contagem de nós da árvore}
+      Vamos definir a função \( N(h) \) de forma a representar o menor número de nós possível para uma árvore AVL de altura \( h \), que chamaremos de \( T \).
 
-Veja que existe uma enorme semelhança entre a função \( N \) e a função \( F \) a seguir, que define a \emph{Sequência de Fibonacci}: \[ F(h) = \begin{cases}
-    F(h-1) + F(h-2) , & \text{se } h \geq 2; \\
-    1               , & \text{se } h = 1; \\
-    0               , & \text{se } h = 0.
-\end{cases} \]
+      Como vimos anteriormente, as sub-árvores de \( T \) devem possuir alturas \( h-1 \) e \( h-2 \), não necessariamente nesta ordem. Além disso, podemos afirmar que ambas se tratam de árvores AVL com o mínimo de nós para a respectiva altura, caso contrário não faria sentido \( T \) possuir tamanho mínimo (já que elas poderiam ser trocadas por outras árvores de mesma altura e menos nós).
 
-De fato, para qualquer valor de \( h \), é o caso que \( N(h) \geq F(h) \). Vamos usar o valor \( f_h \) do \( h \)-ésimo termo dessa sequência para obtermos uma relação entre \( h \) e o número de nós \( N(h) \) da árvore, que denotaremos simplesmente por \( n \). Podemos calcular esse termo de forma não-recursiva como\footnote{Veja \url{https://pt.wikipedia.org/wiki/Sequência_de_Fibonacci\#Fórmula_explícita}} \[ f_h = \frac{1}{\sqrt{5}}\left( \frac{1 + \sqrt{5}}{2} \right)^h - \frac{1}{\sqrt{5}}\left( \frac{1 - \sqrt{5}}{2} \right)^h. \]
+      Dessa forma, podemos afirmar que o valor de \( N(h) \) pode ser calculado como \[ N(h) = \begin{cases}
+          N(h-1) + N(h-2) + 1, & \text{se } h \geq 2; \\
+          1                  , & \text{se } h = 1;    \\
+          0                  , & \text{se } h = 0.
+        \end{cases} \]
 
-Como \( h > 0 \), podemos concluir\footnote{Ver apêndice para a argumentação mais detalhada.} que \[ \frac{1}{\sqrt{5}}\left( \frac{1 - \sqrt{5}}{2} \right)^h \leq 1 \implies f_h \geq \frac{1}{\sqrt{5}}\left( \frac{1 + \sqrt{5}}{2} \right)^h - 1. \]
+      Observe que a função \( N(h) \) é monotonicamente crescente\footnote{Isso porque todos os valores envolvidos são não-negativos e as operações realizadas são apenas adições.}. Com isso, e observando os casos-base, podemos afirmar que \( N(h) \geq 2N(h-2) \)\footnote{Considere que substituímos o termo \( N(h-1) \) por um termo \( N(h-2) \) e o termo 1 por um termo 0. Em ambas as substituições, os novos valores são menores.} para todo \( h \geq 3 \)\footnote{É válido para todo \( h \geq 2 \), mas o valor-base 0 atrapalha a argumentação que vem a seguir.}.
 
-\section{Conclusão}
-Daí, considerando \( a = \frac{1 + \sqrt{5}}{2} \) e lembrando que \( n = N(h) \geq F(h) = f_h \), podemos, ao reescrever a desigualdade anterior, concluir que
-\begin{eqnarray*} 
-	n \geq f_h \geq & \displaystyle\frac{1}{\sqrt{5}} a^h - 1 & \implies \\
-	n + 1 \geq & \displaystyle\frac{1}{\sqrt{5}} a^h & \implies \\
-	\log_a (n + 1) \geq & h - \log_a \sqrt{5} & \implies \\
-	\log_a (n + 1) + \log_a \sqrt{5} \geq & h.
-\end{eqnarray*}
+    \section{Conclusão}
 
-Isso significa que \( h \leq \log_a (n + 1) + \log_a \sqrt{5} = O(\lg n) \), como desejávamos.
+     Resolvendo\footnote{Veja argumentação no Apêndice} a nova equação de recorrência obtida, obtemos que \( N(h) \geq 2^{\sfrac{h}{2}} \). Lembrando que \( N(h) \) é o número de nós de \( T \), que passaremos a denominar por \( n \), concluímos que, para todo \( h \geq 3 \),
+     \begin{alignat*}{3}
+       n = N(h) & \geq 2^{\sfrac{h}{2}} & \quad &  & \implies \\
+       \log_2 n & \geq \frac{h}{2}      & \quad &  & \implies \\
+       h        & \leq 2 \log_2 n       & \quad &  &
+     \end{alignat*}
 
-\part*{Apêndice}
+  \part*{Apêndice}
+
+    \section{Resolução da Recorrência}
+
+     \printbibliography
 
 \end{document}
