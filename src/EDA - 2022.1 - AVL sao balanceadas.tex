@@ -139,8 +139,18 @@
 
     \subsection{Estrutura da árvore}
 
-      % TODO: Reescrever. Ficou um pouco confuso por ter uma sentença muito grande e misturar "árvore anterior" e "sub-árvore anterior"...
-      Para entendermos como construir uma árvore como desejamos, veja que sempre que, em uma árvore AVL \( T \) com altura \( h \), encontrarmos um nó \( n \) com \( bal(n) = 0 \), poderíamos substituir uma de suas sub-árvores por outra AVL com uma altura 1 unidade menor que a que foi retirada sem invalidar a propriedade AVL de \( T \). Isso constrói uma nova árvore \( T^\prime \) com a mesma altura que a anterior \( T \) e certamente tamanho menor. Dessa forma, podemos concluir que a árvore desejada não pode ter nenhum nó com balanço nulo.
+      Para entendermos como construir uma árvore como desejamos, observe o raciocínio a seguir.
+
+      Imagine que \( T \) seja uma árvore AVL com altura \( h \), e considere a situação em que encontramos um nó \( n \in T \) com \( bal(n) = 0 \). Veja que se substituirmos, por exemplo, a sub-árvore \( n.esq \) por uma outra árvore AVL arbitrária com altura \( h(n.esq) - 1 \), estaremos construindo uma nova árvore \( T^\prime \) menor que \( T \) mas de mesma altura e ainda AVL. Veja a~\Vref{fig:troca-sarv}.
+
+      \begin{figure}[hbt]
+        \caption{\label{fig:troca-sarv}}
+        \centering
+        \begin{tikzpicture}[transform shape, scale=.9, nodes={draw, circle, minimum width=3.5ex}, sibling distance=5.5em, level distance=6ex]
+        \end{tikzpicture}
+      \end{figure}
+
+      Isso nos permite concluir que a AVL ``mínima'' de altura \( h \) deve possuir todos os balanços não-nulos, caso contrário ainda poderíamos diminuir seu tamanho usando o raciocínio descrito.
 
     \subsection{Contagem de nós da árvore}
       \label{str:contagem-nos}
