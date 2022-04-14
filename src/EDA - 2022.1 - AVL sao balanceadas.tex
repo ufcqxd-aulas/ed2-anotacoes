@@ -131,8 +131,9 @@
        A argumentação abaixo não é baseada na que consta em~\textcite{Szwarcfiter2010} pois uma das afirmações dadas como válidas não é de fácil demonstração.
      \end{framed}
 
-     % TODO: Reescrever, pois não é exatamente a forma que encontramos no final.
-     Note que devemos mostrar que \( h \leq c \cdot \lg n \) para algum \( c > 0 \), com \( h \) sendo a altura de uma árvore AVL \ul{qualquer} e \( n \) sendo seu tamanho. Entretanto, nossa estratégia será um pouco mais restrita, mas permitirá concluirmos a mesma coisa.
+     Note que, se mostrarmos que a altura de uma árvore AVL \ul{qualquer} sempre é dada no máximo por uma função logarítmica do seu tamanho, poderemos concluir que a ordem de grandeza da altura não pode ser maior que logarítmica. Isso é exatamente o que significa, considerando \( h \) sendo a altura e \( n \) sendo o tamanho, que \( h = O(\lg n) \) e, com isso, que toda AVL seria balanceada.
+
+     Nesse sentido, uma das formas possíveis é se conseguirmos construir uma desigualdade da forma \( h \leq c \cdot k + \lg n \) para constantes \( c \) e \( k \), com \( c > 0 \). A estratégia que seguiremos será um pouco mais restrita, porém permitirá concluirmos a mesma coisa.
 
      Em vez de analisarmos uma árvore qualquer, vamos observar, para um dado \( h \) arbitrário, uma árvore AVL com altura \( h \) que contenha o mínimo possível de nós. Se essa árvore respeitar a desigualdade anterior, poderemos concluir que \emph{todas} as AVL com essa mesma altura também a respeitarão (já que para essa tal árvore o lado direito da desigualdade é o menor possível, todas as outras apresentarão valores ainda maiores, o que mantém a desigualdade).
 
@@ -161,11 +162,11 @@
      Resolvendo\footnote{Veja argumentação no Apêndice.} a nova equação de recorrência obtida, obtemos que \( N(h) \geq 2^{\frac{h-1}{2}} \). Lembrando que \( N(h) \) é o número de nós de \( T \), que passaremos a denominar por \( n \), concluímos que, para todo \( h \geq 3 \),
      \begin{alignat*}{3}
        n = N(h) & \geq 2^{\frac{h-1}{2}} & \quad &  & \implies \\
-       \log_2 n & \geq \frac{h-1}{2}     & \quad &  & \implies \\
-       h        & \leq 1 + 2 \log_2 n    & \quad &  &
+       \lg n    & \geq \frac{h-1}{2}     & \quad &  & \implies \\
+       h        & \leq 1 + 2 \lg n       & \quad &  &
      \end{alignat*}
 
-     Dessa forma, temos todas as informações necessárias para concluirmos que \( h = O(\log n) \).
+     Dessa forma, temos todas as informações necessárias para concluirmos que \( h = O(\lg n) \).
 
   \part*{Apêndice}
 
