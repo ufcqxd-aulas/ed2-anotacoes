@@ -88,6 +88,9 @@
   \fancyfoot{}
   \fancyfoot[LE,RO]{\colorbox{black!20}{\thepage}}
 
+% * NOTE: Redefinição feita para evitar confusão com exponenciações.
+\renewcommand{\thefootnote}{(\roman{footnote})}
+
 \begin{document}
   \noindent
   \begin{minipage}{\textwidth}
@@ -134,34 +137,59 @@
      Em vez de analisarmos uma árvore qualquer, vamos observar, para um dado \( h \) arbitrário, uma árvore AVL com altura \( h \) que contenha o mínimo possível de nós. Se essa árvore respeitar a desigualdade anterior, poderemos concluir que \emph{todas} as AVL com essa mesma altura também a respeitarão (já que para essa tal árvore o lado direito da desigualdade é o menor possível, todas as outras apresentarão valores ainda maiores, o que mantém a desigualdade).
 
     \subsection{Estrutura da árvore}
+
       % TODO: Reescrever. Ficou um pouco confuso por ter uma sentença muito grande e misturar "árvore anterior" e "sub-árvore anterior"...
       Para entendermos como construir uma árvore como desejamos, veja que sempre que, em uma árvore AVL \( T \) com altura \( h \), encontrarmos um nó \( n \) com \( bal(n) = 0 \), poderíamos substituir uma de suas sub-árvores por outra AVL com uma altura 1 unidade menor que a que foi retirada sem invalidar a propriedade AVL de \( T \). Isso constrói uma nova árvore \( T^\prime \) com a mesma altura que a anterior \( T \) e certamente tamanho menor. Dessa forma, podemos concluir que a árvore desejada não pode ter nenhum nó com balanço nulo.
 
     \subsection{Contagem de nós da árvore}
+      \label{str:contagem-nos}
+
       Vamos definir a função \( N(h) \) de forma a representar o menor número de nós possível para uma árvore AVL de altura \( h \), que chamaremos de \( T \).
 
       Como vimos anteriormente, as sub-árvores de \( T \) devem possuir alturas \( h-1 \) e \( h-2 \), não necessariamente nesta ordem. Além disso, podemos afirmar que ambas se tratam de árvores AVL com o mínimo de nós para a respectiva altura, caso contrário não faria sentido \( T \) possuir tamanho mínimo (já que elas poderiam ser trocadas por outras árvores de mesma altura e menos nós).
 
-      Dessa forma, podemos afirmar que o valor de \( N(h) \) pode ser calculado como \[ N(h) = \begin{cases}
+      Dessa forma, podemos afirmar que o valor de \( N(h) \)\footnote{O caso \( h = 0 \) não é considerado, mas é trivial, dado que a única árvore com altura 0 é a árvore vazia, com 0 nós.} pode ser calculado como \[ N(h) = \begin{cases}
           N(h-1) + N(h-2) + 1, & \text{se } h \geq 2; \\
-          1                  , & \text{se } h = 1;    \\
-          0                  , & \text{se } h = 0.
+          2                  , & \text{se } h = 2;    \\
+          1                  , & \text{se } h = 1.
         \end{cases} \]
 
-      Observe que a função \( N(h) \) é monotonicamente crescente\footnote{Isso porque todos os valores envolvidos são não-negativos e as operações realizadas são apenas adições.}. Com isso, e observando os casos-base, podemos afirmar que \( N(h) \geq 2N(h-2) \)\footnote{Considere que substituímos o termo \( N(h-1) \) por um termo \( N(h-2) \) e o termo 1 por um termo 0. Em ambas as substituições, os novos valores são menores.} para todo \( h \geq 3 \)\footnote{É válido para todo \( h \geq 2 \), mas o valor-base 0 atrapalha a argumentação que vem a seguir.}.
+      Observe que a função \( N(h) \) é monotonicamente crescente\footnote{Isso porque todos os valores envolvidos são não-negativos e as operações realizadas são apenas adições.}. Com isso, e observando os casos-base, podemos afirmar que \( N(h) \geq 2N(h-2) \)\footnote{Considere que substituímos o termo \( N(h-1) \) por um termo \( N(h-2) \) e o termo 1 por um termo 0. Em ambas as substituições, os novos valores são menores.} para todo \( h \geq 3 \).
 
     \section{Conclusão}
 
-     Resolvendo\footnote{Veja argumentação no Apêndice} a nova equação de recorrência obtida, obtemos que \( N(h) \geq 2^{\sfrac{h}{2}} \). Lembrando que \( N(h) \) é o número de nós de \( T \), que passaremos a denominar por \( n \), concluímos que, para todo \( h \geq 3 \),
+     Resolvendo\footnote{Veja argumentação no Apêndice.} a nova equação de recorrência obtida, obtemos que \( N(h) \geq 2^{\frac{h-1}{2}} \). Lembrando que \( N(h) \) é o número de nós de \( T \), que passaremos a denominar por \( n \), concluímos que, para todo \( h \geq 3 \),
      \begin{alignat*}{3}
-       n = N(h) & \geq 2^{\sfrac{h}{2}} & \quad &  & \implies \\
-       \log_2 n & \geq \frac{h}{2}      & \quad &  & \implies \\
-       h        & \leq 2 \log_2 n       & \quad &  &
+       n = N(h) & \geq 2^{\frac{h-1}{2}} & \quad &  & \implies \\
+       \log_2 n & \geq \frac{h-1}{2}     & \quad &  & \implies \\
+       h        & \leq 1 + 2 \log_2 n    & \quad &  &
      \end{alignat*}
+
+     Dessa forma, temos todas as informações necessárias para concluirmos que \( h = O(\log n) \).
 
   \part*{Apêndice}
 
     \section{Resolução da Recorrência}
+
+     Na~\Vref{str:contagem-nos} determinamos que \( N(h) \geq 2N(h-2) \) para todo \( h \geq 3 \). Vamos agora mostrar que isso implica em \( N(h) \geq 2^{\frac{h-1}{2}} \) para todo \( h \geq 3 \).
+
+     Observe a seguinte sequência de desigualdades, obtida por sucessivas aplicações da desigualdade mencionada acima.
+
+     \begin{alignat*}{2}
+       N(h) & \geq 2N(h-2)           &  & = 2^1 N(h-2)  \\
+            & \geq 2(2N(h-4))        &  & = 2^2 N(h-4)  \\
+            & \geq 2^2(2N(h-6))      &  & = 2^3 N(h-6)  \\
+            & \geq 2^3(2N(h-8))      &  & = 2^4 N(h-8)  \\
+            & \dots                  &  & \dots         \\
+            & \geq 2^{k-1}(2N(h-2k)) &  & = 2^k N(h-2k)
+     \end{alignat*}
+
+     Considerando que a última substituição nos tenha trazido a um caso base, temos as seguintes possibilidades:
+
+     \begin{description}
+       \item[CASO \( h-2k = 2 \):] podemos concluir que \( k = \frac{h-2}{2} \) e que \[ N(h) \geq 2^{\frac{h-2}{2}} N(2) = 2^{\frac{h-2}{2}} \cdot 2 = 2^{\frac{h}{2}} \geq 2^{\frac{h-1}{2}}. \]
+       \item[CASO \( h-2k = 1 \):] podemos concluir que \( k = \frac{h-1}{2} \) e que \[ N(h) \geq 2^{\frac{h-1}{2}} N(1) = 2^{\frac{h-1}{2}} \cdot 1 = 2^{\frac{h-1}{2}}. \]
+     \end{description}
 
      \printbibliography
 
