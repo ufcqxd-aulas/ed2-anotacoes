@@ -24,14 +24,10 @@
 
 \usepackage{tikz}
 
-\usetikzlibrary{shapes.geometric}
+  \usetikzlibrary{shapes.geometric, positioning, decorations.pathreplacing}
 
 \usepackage{kpfonts}
 \usepackage[T1]{fontenc}
-
-\usepackage{a4wide}
-
-  \setlength{\headheight}{12.5pt}
 
 \usepackage{tabularx}
 
@@ -151,15 +147,33 @@
       Imagine que \( T \) seja uma árvore AVL com altura \( h \), e considere a situação em que encontramos um nó \( n \in T \) com \( bal(n) = 0 \). Veja que se substituirmos, por exemplo, a sub-árvore \( n.esq \) por uma outra árvore AVL arbitrária com altura \( h(n.esq) - 1 \), estaremos construindo uma nova árvore \( T^\prime \) menor que \( T \) mas de mesma altura e ainda AVL. Veja a~\Vref{fig:troca-sarv}.
 
       \begin{figure}[hbt]
-        \caption{\label{fig:troca-sarv}}
+        \caption{\label{fig:troca-sarv} Perceba que retiramos nós, mas a altura de \( n \) permanece a mesma. Isso não gera alteração para a árvore que o contém.}
         \centering
-        \begin{tikzpicture}[transform shape, scale=.9, nodes={draw, circle, minimum width=3.5ex}, sibling distance=5.5em, level distance=6ex]
-          \draw node [label=south:{\( 0 \)}] {\( n \)}
-          child [child anchor=apex] { node [draw,isosceles triangle,shape border rotate=90,anchor=apex] (to replace) {\( n.esq \)}}
-          child [child anchor=apex] { node [draw,isosceles triangle,shape border rotate=90,anchor=apex] {\( n.dir \)}}
+        \begin{tikzpicture}[nodes={draw, circle, minimum width=3ex}, sibling distance=5em, level distance=6ex]
+          \draw node [label=south:{\( 0 \)}] (root) {\( n \)}
+          child [child anchor=apex] {
+              node [draw, dashed, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] {}
+            }
+          child [child anchor=apex] {
+              node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (n_dir) {}
+            }
           ;
 
-          \node [right of=to replace] {\( \Rightarrow \)};
+          \draw[black!50, dashed] (root.north) -- +(0, 6ex);
+
+          \draw[decorate, decoration={brace, mirror, amplitude=7pt, raise=6em}] (root.north) |- (n_dir.west) node [draw=none, pos=0.3, left=7em] {altura \( l \)};
+
+          \node [draw=none, right=3em of n_dir.apex] {\Large \( \Rightarrow \)};
+        \end{tikzpicture}
+        \begin{tikzpicture}[nodes={draw, circle, minimum width=3ex}, sibling distance=5em, level distance=6ex]
+          \draw node [label=south:{\( +1 \)}] (root) {\( n \)}
+          child [child anchor=apex] { node [draw=black!60, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}}
+          child [child anchor=apex] { node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (n_dir) {}}
+          ;
+
+          \draw[black!50, dashed] (root.north) -- +(0, 6ex);
+
+          \draw[decorate, decoration={brace, amplitude=7pt, raise=6em}] (root.north) |- (n_dir.west) node [draw=none, pos=0.3, left=-11em] {altura \( l \)};
         \end{tikzpicture}
       \end{figure}
 
