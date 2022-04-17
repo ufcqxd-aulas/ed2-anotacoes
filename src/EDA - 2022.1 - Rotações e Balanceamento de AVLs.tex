@@ -1,0 +1,129 @@
+\documentclass[11pt,twoside]{article}
+
+\usepackage[
+  a4paper,
+  margin=1.5cm,
+  includehead, includefoot
+]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[brazil,portuges]{babel}
+\usepackage{csquotes}
+
+% \usepackage[
+%   backend=biber,
+%   style=abnt,
+%   language=auto,
+% ]{biblatex}
+
+%   \addbibresource{../refs/referencias.bib}
+
+\usepackage{soul}
+\usepackage{xcolor}
+\usepackage{framed}
+
+\usepackage{tikz}
+
+  \usetikzlibrary{shapes.geometric, positioning, decorations.pathreplacing}
+
+\usepackage{kpfonts}
+\usepackage[T1]{fontenc}
+
+\usepackage{tabularx}
+
+  \newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{hhline}
+\usepackage{booktabs}
+\usepackage[inline]{enumitem}
+\usepackage{xfrac}
+\usepackage{mathtools}
+
+  \newcommand{\Binary}{\ensuremath{\mathbb{B}}}
+  \newcommand{\Natural}{\ensuremath{\mathbb{N}}}
+  \newcommand{\Integer}{\ensuremath{\mathbb{Z}}}
+  \newcommand{\Rational}{\ensuremath{\mathbb{Q}}}
+  \newcommand{\Real}{\ensuremath{\mathbb{R}}}
+
+  \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+  \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+  \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+
+\usepackage{amsthm}
+
+  \newtheorem{proposition}{Proposição}[section]
+  \theoremstyle{definition}
+  \newtheorem{definition}{Definição}[section]
+
+\usepackage{multicol}
+
+  \newcommand{\finishcols}{\vfill\vphantom{.}}
+
+\usepackage[portuguese,algoruled,vlined,noend]{algorithm2e}
+
+  \SetKwInput{Algoritmo}{Algoritmo}
+  \SetKw{Retorne}{retorne}
+  \SetKwFor{Para}{para}{faça}{fimpara}
+  \SetKw{Escreva}{escreva}
+  \DontPrintSemicolon
+
+\usepackage{hyperref}
+\usepackage[brazil]{varioref}
+\usepackage[brazilian]{cleveref}
+
+  \def\disciplinacodigotext{QXD0115}
+  \def\disciplinanometext{Estrutura de Dados Avançada}
+  \def\semestretext{2022.1}
+  \def\provatype{Notas de Aula}
+  \def\provatitle{Rotações e Balanceamento de AVLs}
+  \def\provatext{\provatype{} \ifx\provatype\empty {} \else {--} \fi \provatitle{}}
+  \def\provacodtext{}
+  \def\professorabbrv{Prof.}
+  \def\professornometext{Arthur Araruna}
+
+\usepackage{fancyhdr}
+
+  \pagestyle{fancy}
+  \fancyhead{}
+  \lhead{\disciplinacodigotext}
+  \chead{\provatext}
+  \rhead{\semestretext}
+  \fancyfoot{}
+  \fancyfoot[LE,RO]{\colorbox{black!20}{\thepage}}
+
+% * NOTE: Redefinição feita para evitar confusão com exponenciações.
+\renewcommand{\thefootnote}{(\roman{footnote})}
+
+\begin{document}
+  \noindent
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{cXc}
+      \multirow{4}{*}{\includegraphics[height=1.8cm]{brasaoufc.pdf}} & {\bf UNIVERSIDADE FEDERAL DO CEARÁ}         & \multirow{3}{*}{} \\
+                                                                     & {\bf Campus de Quixadá}                     &                   \\
+                                                                     & \professorabbrv\enspace\professornometext   &                   \\
+                                                                     & \disciplinacodigotext - \disciplinanometext & {}                \\
+    \end{tabularx}
+  \end{minipage}
+
+  \part*{\provatitle}
+
+    \section{Conceitos}
+
+     Vamos relembrar o nossos conceitos que serão necessários para o resultado a ser demonstrado:
+
+     \begin{definition}
+
+     \end{definition}
+
+    \section{Conclusão}
+
+
+     %\part*{Apêndice}
+
+
+     %\printbibliography
+
+\end{document}
