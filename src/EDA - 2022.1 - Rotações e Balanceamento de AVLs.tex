@@ -117,7 +117,9 @@
      \begin{definition}
        \emph{Rotação simples} (à direita ou à esquerda) é uma das transformações estruturais representadas a seguir, realizadas sobre a raiz de uma sub-árvore.
 
-       \begin{center}
+       \begin{figure}[h]
+         \centering
+         \caption{\label{fig:rot-simples}}
          \begin{tikzpicture}[transform shape, scale=0.9]
            \begin{scope}[nodes={draw, circle, minimum width=2.5ex}, sibling distance=5em, level distance=5ex]
              % Sub-árvore que representa *antes* da rotação simples à direita
@@ -171,13 +173,15 @@
              \draw [-{Latex[fill=none]}, blue, double, double distance=1.5pt] (lr begin) -- +(180:6em) node [draw=none, midway, label={below:{à esquerda (em \( u \))}}] {};
            \end{scope}
          \end{tikzpicture}
-       \end{center}
+       \end{figure}
      \end{definition}
 
      \begin{definition}
        \emph{Rotação dupla} (à direita ou à esquerda) é uma das transformações estruturais representadas a seguir, realizadas sobre a raiz de uma sub-árvore.
 
-       \begin{center}
+       \begin{figure}[h]
+         \centering
+         \caption{\label{fig:rot-dupla}}
          \begin{tikzpicture}[transform shape, scale=0.9]
            \begin{scope}[nodes={draw, circle, minimum width=2.5ex}, sibling distance=5em, level distance=5ex]
              % Sub-árvore que representa *antes* da rotação dupla à direita
@@ -267,7 +271,7 @@
              \draw [-{Latex[fill=none]}, blue, double, double distance=1.5pt] (dlr begin) -- +(180:5em) node [draw=none, midway, label={above:{à esquerda (em \( u \))}}] {};
            \end{scope}
          \end{tikzpicture}
-       \end{center}
+       \end{figure}
      \end{definition}
 
     \section{Rotações preservam propriedade ABB}
