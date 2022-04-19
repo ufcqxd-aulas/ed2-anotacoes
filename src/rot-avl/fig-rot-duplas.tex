@@ -1,0 +1,89 @@
+\begin{tikzpicture}[transform shape, scale=0.8]
+	\begin{scope}[nodes={draw, circle, minimum width=2.5ex}, sibling distance=5em, level distance=5ex]
+		% Sub-árvore que representa *antes* da rotação dupla à direita
+		\draw node (p drr) {\( p \)}
+		child [xshift=-0.5em] {
+				node (u drr) {\( u \)}
+				child [child anchor=apex] {
+						node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T1 drr) {\( T_1 \)}
+					}
+				child {
+						node (v drr) {\( v \)}
+						child [child anchor=apex]{
+								node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T2 drr) {\( T_2 \)}}
+						child [child anchor=apex]{
+								node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T3 drr) {\( T_3 \)}}
+					}
+			}
+		child [xshift=0.5em, child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T4 drr) {\( T_4 \) }
+			}
+		;
+	\end{scope}
+
+	% Arco que chama atenção para operação de rotação ser à direita na raiz
+	\draw [-{>>[flex']}, red!80] ([shift=(180:1.5em)]p drr.center) arc (180:20:1.5em);
+
+
+	\begin{scope}[nodes={draw, circle, minimum width=2.5ex}, sibling distance=3.5em, level distance=5ex]
+		\draw node [right=17em of p drr] (v post) {\( v \)}
+		child [xshift=-1.8em] {
+				node (u post) {\( u \)}
+				child [child anchor=apex] {
+						node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T1 post) {\( T_1 \) }
+					}
+				child [child anchor=apex] {
+						node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T2 post) {\( T_2 \) }
+					}
+			}
+		child [xshift=1.8em] {
+				node (p post) {\( p \)}
+				child [child anchor=apex] {
+						node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T3 post) {\( T_3 \) }
+					}
+				child [child anchor=apex] {
+						node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T4 post) {\( T_4 \) }
+					}
+			}
+		;
+	\end{scope}
+
+
+	\begin{scope}[nodes={draw, circle, minimum width=2.5ex}, sibling distance=5em, level distance=5ex]
+		% Sub-árvore que representa *antes* de rotação dupla à esquerda
+		\draw node [right=17em of v post] (u dlr) {\( u \)}
+		child [xshift=-0.5em, child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T1 dlr) {\( T_1 \) }
+			}
+		child [xshift=0.5em] {
+				node (p dlr) {\( p \)}
+				child {
+						node (v dlr) {\( v \)}
+						child [child anchor=apex] {
+								node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T2 dlr) {\( T_2 \)}
+							}
+						child [child anchor=apex] {
+								node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T3 dlr) {\( T_3 \)}
+							}
+					}
+				child [child anchor=apex] {
+						node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T4 dlr) {\( T_4 \)}
+					}
+			}
+		;
+	\end{scope}
+
+	% Arco que chama atenção para operação de rotação ser à direita na raiz
+	\draw [-{>>[flex']}, blue] ([shift=(0:1.5em)]u dlr.center) arc (0:160:1.5em);
+
+	% Setas e legenda que destacam estado *após* cada rotação
+	\begin{scope}
+		\coordinate (left part) at ($(T4 drr)!0.5!(u post)$);
+		\coordinate (right part) at ($(p post)!0.5!(T1 dlr)$);
+		\coordinate (drr begin) at ($(left part)+(180:3em)$);
+		\coordinate (dlr begin) at ($(right part)+(0:3em)$);
+
+		\draw [-{Latex[fill=none]}, red!80, double, double distance=1.5pt] (drr begin) --  +(0:5em) node [draw=none, midway, label={above:{à direita (em \( p \))}}] {};
+		\draw [-{Latex[fill=none]}, blue, double, double distance=1.5pt] (dlr begin) -- +(180:5em) node [draw=none, midway, label={above:{à esquerda (em \( u \))}}] {};
+	\end{scope}
+\end{tikzpicture}

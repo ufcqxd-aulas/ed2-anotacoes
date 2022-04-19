@@ -1,0 +1,53 @@
+\begin{tikzpicture}[transform shape, scale=0.8]
+	\begin{scope}[nodes={draw, circle, minimum width=2.5ex}, sibling distance=5em, level distance=5ex]
+		% Sub-árvore que representa *antes* da rotação simples à direita
+		\draw node (p pre) {\( p \)}
+		child {
+				node (u pre) {\( u \)}
+				child [child anchor=apex] {
+						node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T1 pre) {\( T_1 \)}
+					}
+				child [child anchor=apex] {
+						node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T2 pre) {\( T_2 \)}
+					}
+			}
+		child [child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T3 pre) {\( T_3 \) }
+			}
+		;
+	\end{scope}
+
+	% Arco que chama atenção para operação de rotação ser à direita na raiz
+	\draw [->, red!80] ([shift=(180:1.5em)]p pre.center) arc (180:20:1.5em);
+
+	\begin{scope}[nodes={draw, circle, minimum width=2.5ex}, sibling distance=5em, level distance=5ex]
+		% Sub-árvore que representa *antes* de rotação simples à esquerda
+		\draw node [right=16em of p pre] (u post) {\( u \)}
+		child [child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T1 post) {\( T_1 \) }
+			}
+		child {
+				node (p post) {\( p \)}
+				child [child anchor=apex] {
+						node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T2 post) {\( T_2 \)}
+					}
+				child [child anchor=apex] {
+						node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T3 post) {\( T_3 \)}
+					}
+			}
+		;
+	\end{scope}
+
+	% Arco que chama atenção para operação de rotação ser à direita na raiz
+	\draw [->, blue] ([shift=(0:1.5em)]u post.center) arc (0:160:1.5em);
+
+	% Setas e legenda que destacam estado *após* cada rotação
+	\begin{scope}
+		\coordinate (center) at ($(current bounding box.north)!0.5!(current bounding box.south)$);
+		\coordinate (rr begin) at ($(center)+(-3em,2em)$);
+		\coordinate (lr begin) at ($(center)+(3em,-2em)$);
+
+		\draw [-{Latex[fill=none]}, red!80, double, double distance=1.5pt] (rr begin) --  +(0:6em) node [draw=none, midway, label={above:{à direita (em \( p \))}}] {};
+		\draw [-{Latex[fill=none]}, blue, double, double distance=1.5pt] (lr begin) -- +(180:6em) node [draw=none, midway, label={below:{à esquerda (em \( u \))}}] {};
+	\end{scope}
+\end{tikzpicture}
