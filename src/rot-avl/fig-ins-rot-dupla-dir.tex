@@ -1,0 +1,23 @@
+\begin{tikzpicture}[transform shape, scale=0.8]
+	\begin{scope}[nodes={draw, circle, minimum width=2.5ex}, sibling distance=5em, level distance=5ex]
+		% Sub-árvore que representa *antes* da rotação dupla à direita
+		\draw node (p drr) [label={[rectangle, fill=black!30]south:{\( -2 \)}}] {\( p \)}
+		child [xshift=-0.5em] {
+		node (u drr) [label={[rectangle, fill=black!30]south:{\( +1 \)}}] {\( u \)}
+		child [child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T1 drr) {\( T_1 \)}
+			}
+		child {
+		node (v drr) [label={[rectangle, fill=black!30]south:{\( b_v \)}}] {\( v \)}
+		child [child anchor=apex]{
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T2 drr) {\( T_2 \)}}
+		child [child anchor=apex]{
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T3 drr) {\( T_3 \)}}
+		}
+		}
+		child [xshift=0.5em, child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T4 drr) {\( T_4 \) }
+			}
+		;
+	\end{scope}
+\end{tikzpicture}

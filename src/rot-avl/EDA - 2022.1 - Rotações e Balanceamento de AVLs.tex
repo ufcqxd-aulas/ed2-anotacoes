@@ -209,6 +209,7 @@ Existem alguns casos possíveis para os balanços e a estrutura de \( T \) nessa
 \subsection{Inserção na sub-árvore esquerda de \( p \)}
 
 \subsubsection{Inserção na sub-árvore esquerda de \( u \)}
+\label{block:ins-rd}
 
 Nesse caso, certamente a configuração da sub-árvore de \( p \) e seus balanços é a representada na ~\Vref{fig:ins-rot-dir}.
 \begin{figure}[hbt]
@@ -242,15 +243,73 @@ Isso nos permite afirmar que após realizarmos uma rotação à direita em \( p 
 	\input{fig-ins-rot-dir-post.tex}
 \end{figure}
 
-Dessas informações, podemos concluir que a sub-árvore rotacionada passou a estar toda balanceada, já que os novos balanços são 0 e não alteramos as estruturas das sub-árvores \( T_1, T_2 \) e \( T_3 \). Além disso, podemos concluir que a altura dessa sub-árvore sob a ótica dos seus ancestrais não mudou entre antes e depois da inserção\footnote{Veja~\Vref{block:altura-nao-muda}.}.
+Dessas informações, podemos concluir que a sub-árvore rotacionada passou a estar toda balanceada, já que os novos balanços são 0 e não alteramos as estruturas das sub-árvores \( T_1, T_2 \) e \( T_3 \). Além disso, podemos concluir que a altura dessa sub-árvore sob a ótica dos seus ancestrais não mudou entre antes e depois da inserção\footnote{Veja~\Vref{block:altura-nao-muda}.}. Isso significa que com apenas essa rotação conseguimos rebalancear toda a árvore.
+
+\subsubsection{Inserção na sub-árvore esquerda de \( u \)}
+\label{block:ins-rdd}
+
+Nesse caso, certamente a configuração da sub-árvore de \( p \) e seus balanços é a representada na ~\Vref{fig:ins-rot-dir}.
+\begin{figure}[hbt]
+	\caption{\label{fig:ins-rot-dupla-dir} Nó \( n \) faz parte da sub-árvore \( T(v) \).}
+	\centering
+	\input{fig-ins-rot-dupla-dir.tex}
+\end{figure}
+
+Note que o nó \( v \) pode ou não ser o novo nó \( n \) inserido. Seu valor de balanço \( b_v \) será analisado em breve. Independentemente disso, podemos concluir algumas relações entre as alturas das sub-árvores:
+\begin{enumerate}[label={\Roman*.}, series=alturas-duplas]
+	\item \label{item:h-v-h-T1} \( bal(u) = +1 \implies h(v) - h(T_1) = +1 \implies h(v) = h(T_1) + 1 \)
+	\item \label{item:h-u-h-T4} \( bal(p) = -2 \implies h(T_4) - h(u) = -2 \implies h(u) = h(T_4) + 2 \)
+	\item \label{item:h-v} \( h(v) = \max \{ h(T_2); h(T_3) \} + 1 \)
+	\item \label{item:h-u-h-v} \( h(u) = h(v) + 1 \)
+\end{enumerate}
+
+A partir de substituições entre os itens acima, ainda concluímos que:
+\begin{enumerate}[label={\Roman*.}, resume=alturas-duplas]
+	\item \label{item:h-T1}\( h(T_1) = \max \{ h(T_2); h(T_3) \} \implies h(T_1) \geq h(T_2), h(T_3) \)
+	\item \label{item:h-T4}\( h(T_4) = (h(v) + 1) - 2 = (\max \{ h(T_2);\; h(T_3) \} + 1) - 1 = \max \{ h(T_2);\; h(T_3) \} \implies h(T_4) \geq h(T_2), h(T_3) \)
+	\item \label{item:h-T1-h-T4}\( h(T_1) = h(T_4) \)
+\end{enumerate}
+
+Após uma rotação dupla à direita, teremos a situação na~\Vref{fig:ins-rot-dupla-dir-post}.
+\begin{figure}[hbt]
+	\caption{\label{fig:ins-rot-dupla-dir-post}}
+	\centering
+	\input{fig-ins-rot-dupla-dir-post.tex}
+\end{figure}
+Veja que por conta de~\ref{item:h-T1-h-T4} e dos itens \ref{item:h-T1} e~\ref{item:h-T4}, podemos calcular o novo balanço de \( v \) como sendo:
+\begin{alignat*}{1}
+	bal(v) & = h(p) - h(u)                                                                                     \\
+	       & = \left( \max \{ h(T_3);\; h(T_4) \} + 1 \right) - \left( \max \{ h(T_1);\; h(T_2) \} + 1 \right) \\
+	       & = (h(T_4) + 1) - (h(T_1) + 1)                                                                     \\
+	       & = 0
+\end{alignat*}
+E também observamos que os valores exatos dos novos balanços de \( u \) e \( p \) vão depender diretamente do valor de \( b_v \).
+
+Por conta da escolha de \( p \)\footnote{Lembre-se que \( p \) deve ser o nó desbalanceado mais profundo, o que impede que \( v \) esteja balanceado.}, certamente o balanço \( b_v \in \{ -1, 0, +1 \} \).
+
+\paragraph{CASO \( b_v = 0\):} concluímos que, como \( h(T_2) = h(T_3) \), necessariamente \( b_u = b_p = 0 \).
+
+\paragraph{CASO \( b_v = +1\):} concluímos que, como \( h(T_3) = h(T_2) + 1 \), necessariamente \( b_u = -1 \) e \( b_p = 0 \).
+
+\paragraph{CASO \( b_v = -1\):} concluímos que, como \( h(T_2) = h(T_3) + 1 \), necessariamente \( b_u = 0 \) e \( b_p = +1 \).
+
+Em todos os casos, podemos concluir que todos os nós afetados estarão balanceados após a rotação. Além disso, semelhante à~\Vref{block:ins-rd}, podemos concluir que todos os nós da árvore como um todo voltaram a estar balanceados.
+
+\subsection{Demais casos}
+
+Os demais casos são na verdade as situações simétricas dos casos descritos anteriormente nas~\Vrefrange{block:ins-rd}{block:ins-rdd}.
 
 \section{Conclusão}
 
+Concluímos que uma única rotação é suficiente para corrigir o balanço de todos os nós de uma árvore AVL após uma inserção. Basta localizarmos o nó mais profundo que tenha se desbalanceado por conta dessa inserção. Essa informação será usada na construção do algoritmo {\scshape InserirAVL}.
+
+Além disso, a mecânica de análise seguida por nós será aproveitada para concluirmos como corrigir um desbalanceamento após remoção através de rotações, e como usar isso no algoritmo {\scshape RemoverAVL}.
 
 \part*{Apêndice}
 
 \section{Altura não muda após rotação}
 \label{block:altura-nao-muda}
+\emph{(falta texto...)} % TODO: Completar texto
 
 
 %\printbibliography

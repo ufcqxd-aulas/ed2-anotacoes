@@ -1,0 +1,24 @@
+\begin{tikzpicture}[transform shape, scale=0.8]
+	\begin{scope}[nodes={draw, circle, minimum width=2.5ex}, sibling distance=3.5em, level distance=5ex]
+		\draw node  [label={[rectangle, fill=red!30]south:{\( 0 \)}}] (v post) {\( v \)}
+		child [xshift=-1.8em] {
+		node (u post) [label={[rectangle, fill=red!30]south:{\( b_u \)}}] {\( u \)}
+		child [child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T1 post) {\( T_1 \) }
+			}
+		child [child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T2 post) {\( T_2 \) }
+			}
+		}
+		child [xshift=1.8em] {
+		node (p post) [label={[rectangle, fill=red!30]south:{\( b_p \)}}] {\( p \)}
+		child [child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T3 post) {\( T_3 \) }
+			}
+		child [child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T4 post) {\( T_4 \) }
+			}
+		}
+		;
+	\end{scope}
+\end{tikzpicture}
