@@ -131,7 +131,7 @@ Vamos relembrar o nossos conceitos que serão necessários para o resultado a se
 
 	\begin{figure}[h]
 		\centering
-		\caption{\label{fig:rot-dupla}}
+		\caption{\label{fig:rot-duplas}}
 		\input{fig-rot-duplas.tex}
 	\end{figure}
 \end{definition}
@@ -141,6 +141,7 @@ Vamos relembrar o nossos conceitos que serão necessários para o resultado a se
 Observando as operações de rotação, podemos concluir que, se a árvore dada como entrada for binária de busca, qualquer das rotações realizada em qualquer dos seus nós preservará essa propriedade. Ou seja, após a rotação a nova estrutura obtida também será binária de busca.
 
 \subsection{Rotações simples}
+
 Suponha que a árvore à esquerda na~\Vref{fig:rot-simples} seja binária de busca. Isso significa que todas as relações a seguir são verdadeiras(considere que quando falamos sobre uma sub-árvore estejamos falando sobre todos os seus nós):
 \begin{itemize}
 	\begin{multicols}{2}
@@ -167,12 +168,89 @@ Como os nós na sub-árvore rotacionada mudaram apenas de posição, mas permane
 
 Por fim, perceba que o caso da rotação simples à esquerda é simétrico ao que acabamos de observar.
 
+\subsection{Rotações duplas}
+
+Considere agora que a árvore mais à esquerda na~\Vref{fig:rot-duplas} seja binária de busca. Isso significa que todas as relações a seguir são verdadeiras(considere que quando falamos sobre uma sub-árvore estejamos falando sobre todos os seus nós):
+\begin{itemize}
+	\begin{multicols}{3}
+		\item \( T_1 < u \)
+		\item \( u < v \)
+		\item \( T_2 < v \)
+		\item \( v < T_3 \)
+		\item \( u < p \)
+		\item \( p < T_4 \)
+	\end{multicols}
+\end{itemize}
+
+E, para que a estrutura após uma rotação dupla à direita (árvore ao centro) mantenha a propriedade, precisamos concluir que:
+\begin{itemize}
+	\begin{multicols}{3}
+		\item \( T_1 < u \)
+		\item \( u < T_2 \)
+		\item \( u < v \)
+		\item \( v < p \)
+		\item \( T_3 < p \)
+		\item \( p < T_4 \)
+	\end{multicols}
+\end{itemize}
+
+Da mesma forma, observe que todas as novas relações podem ser obtidas das anteriores e globalmente a situação não é alterada. O caso à esquerda também é simétrico (considere a árvore mais à direita).
+
 \section{Rotações corrigem desbalanceamento}
+
+Nosso problema atual consiste em corrigir situações de desbalanceamento que possam ser criadas após uma inserção em uma árvore AVL. Vamos considerar os casos gerados nessa situação e observar que podemos resolvê-los usando alguma das rotações que definimos.
+
+Considere uma árvore \( T \) inicialmente AVL no momento imediatamente após a inserção de um novo nó \( n \). Seja \( p \) o nó mais profundo\footnote{O de maior nível dentre todos os nós.} de \( T \) que se tornou desbalanceado após essa inserção.
+
+Primeiramente, observe que \( p \) não pode ser uma folha\footnote{O balanço de qualquer folha é sempre 0, pois ambas as suas sub-árvores são vazias.} e que ele precisa ser um ascendente de \( n \)\footnote{Caso contrário, como a inserção o teria desbalanceado, se ela não teria ocorrido em uma de suas sub-árvores?}. Por fim, a raiz da sub-árvore de \( p \) afetada pela inserção de \( n \) não pode ser o próprio \( n \)\footnote{Pois antes ela era uma sub-árvore vazia, o que não pode ter tornado \( p \) desbalanceado.}. Chamaremos, então, essa raiz de \( u \).
+
+Existem alguns casos possíveis para os balanços e a estrutura de \( T \) nessa situação.
+
+\subsection{Inserção na sub-árvore esquerda de \( p \)}
+
+\subsubsection{Inserção na sub-árvore esquerda de \( u \)}
+
+Nesse caso, certamente a configuração da sub-árvore de \( p \) e seus balanços é a representada na ~\Vref{fig:ins-rot-dir}.
+\begin{figure}[hbt]
+	\caption{\label{fig:ins-rot-dir} Nó \( n \) faz parte da sub-árvore \( T_1 \).}
+	\centering
+	\input{fig-ins-rot-dir.tex}
+\end{figure}
+
+Assim, a seguintes relações podem se estabelecidas:
+\begin{enumerate}[label={\Roman*.}]
+	\item \label{item:h-T3} \( bal(p) = -2 \implies h(T_3) - h(u) = -2 \implies h(T_3) = h(u) - 2 \)
+	\item \label{item:h-T2} \( bal(u) = -1 \implies h(T_2) - h(T_1) = -1 \implies h(T_2) = h(T_1) - 1 \)
+	\item \label{item:h-u} \( h(u) = h(T_1) + 1 \)\footnote{Pela definição recursiva de altura e porque o balanço nos informa a sub-árvore mais alta.}
+\end{enumerate}
+
+Se substituirmos~\ref{item:h-u} em~\ref{item:h-T3}, e usarmos a expressão obtida em~\ref{item:h-T2}, encontraremos também que
+\begin{enumerate}[resume, label={\Roman*.}]
+	\item \( h(T_3) = h(T_1) + 1 - 2 \implies h(T_3) = h(T_1) - 1 \)
+	\item \label{item:h-T2-h-T3} \( h(T_2) = (h(T_3) + 1) - 1 \implies h(T_2) = h(T_3) \)
+\end{enumerate}
+
+Isso nos permite afirmar que após realizarmos uma rotação à direita em \( p \) (\Vref{fig:ins-rot-dir-post}) os novos balanços de \( p \) e \( u \) serão:
+\begin{itemize}
+	\item \( bal(p) = b_p = h(T_3) - h(T_2) = 0 \)\footnote{Observando~\ref{item:h-T2-h-T3}}
+	\item \( bal(u) = b_u = h(p) - h(T_1) = (h(T_2) + 1) - h(T_1) = (h(T_1) - 1) + 1 - h(T_1) = 0 \)\footnote{Observando a definição recursiva de altura para \( p \) e o item~\ref{item:h-T2}}
+\end{itemize}
+
+\begin{figure}[hbt]
+	\caption{\label{fig:ins-rot-dir-post}}
+	\centering
+	\input{fig-ins-rot-dir-post.tex}
+\end{figure}
+
+Dessas informações, podemos concluir que a sub-árvore rotacionada passou a estar toda balanceada, já que os novos balanços são 0 e não alteramos as estruturas das sub-árvores \( T_1, T_2 \) e \( T_3 \). Além disso, podemos concluir que a altura dessa sub-árvore sob a ótica dos seus ancestrais não mudou entre antes e depois da inserção\footnote{Veja~\Vref{block:altura-nao-muda}.}.
 
 \section{Conclusão}
 
 
-%\part*{Apêndice}
+\part*{Apêndice}
+
+\section{Altura não muda após rotação}
+\label{block:altura-nao-muda}
 
 
 %\printbibliography

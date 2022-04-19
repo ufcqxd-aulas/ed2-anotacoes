@@ -1,0 +1,19 @@
+\begin{tikzpicture}[transform shape, scale=0.8]
+	\begin{scope}[nodes={draw, circle, minimum width=2.5ex}, sibling distance=5em, level distance=5ex]
+		% Sub-árvore que representa *após* inserção gerando caso de rotação simples à direita
+		\draw node (u post) [label={[rectangle, fill=red!30]south:{\( b_u = 0 \)}}] {\( u \)}
+		child [child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T1 post) {\( T_1 \) }
+			}
+		child {
+		node (p post) [label={[rectangle, fill=red!30]south:{\( b_p = 0 \)}}] {\( p \)}
+		child [child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T2 post) {\( T_2 \)}
+			}
+		child [child anchor=apex] {
+				node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T3 post) {\( T_3 \)}
+			}
+		}
+		;
+	\end{scope}
+\end{tikzpicture}
