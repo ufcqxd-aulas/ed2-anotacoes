@@ -218,14 +218,14 @@ Nesse caso, certamente a configuração da sub-árvore de \( p \) e seus balanç
 \end{figure}
 
 Assim, a seguintes relações podem se estabelecidas:
-\begin{enumerate}[label={\Roman*.}]
+\begin{enumerate}[label={\Roman*.}, series=alturas-simples]
 	\item \label{item:h-T3} \( bal(p) = -2 \implies h(T_3) - h(u) = -2 \implies h(T_3) = h(u) - 2 \)
 	\item \label{item:h-T2} \( bal(u) = -1 \implies h(T_2) - h(T_1) = -1 \implies h(T_2) = h(T_1) - 1 \)
 	\item \label{item:h-u} \( h(u) = h(T_1) + 1 \)\footnote{Pela definição recursiva de altura e porque o balanço nos informa a sub-árvore mais alta.}
 \end{enumerate}
 
 Se substituirmos~\ref{item:h-u} em~\ref{item:h-T3}, e usarmos a expressão obtida em~\ref{item:h-T2}, encontraremos também que
-\begin{enumerate}[resume, label={\Roman*.}]
+\begin{enumerate}[label={\Roman*.}, resume=alturas-simples]
 	\item \( h(T_3) = h(T_1) + 1 - 2 \implies h(T_3) = h(T_1) - 1 \)
 	\item \label{item:h-T2-h-T3} \( h(T_2) = (h(T_3) + 1) - 1 \implies h(T_2) = h(T_3) \)
 \end{enumerate}
