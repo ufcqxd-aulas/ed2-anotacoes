@@ -138,7 +138,7 @@
            % Arco que chama atenção para operação de rotação ser à direita na raiz
            \draw [->, red!80] ([shift=(180:1.5em)]p pre.center) arc (180:20:1.5em);
 
-           % Sub-árvore que representa *antes* de rotação à esquerda
+           % Sub-árvore que representa *antes* de rotação simples à esquerda
            \draw node [right=16em of p pre] (u post) {\( u \)}
            child [child anchor=apex] {
                node [draw, isosceles triangle, shape border rotate=90, anchor=apex, minimum width=3em] (T1 post) {\( T_1 \) }
