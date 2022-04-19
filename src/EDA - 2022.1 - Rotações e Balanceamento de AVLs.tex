@@ -276,6 +276,35 @@
 
     \section{Rotações preservam propriedade ABB}
 
+     Observando as operações de rotação, podemos concluir que, se a árvore dada como entrada for binária de busca, qualquer das rotações realizada em qualquer dos seus nós preservará essa propriedade. Ou seja, após a rotação a nova estrutura obtida também será binária de busca.
+
+    \subsection{Rotações simples}
+      Suponha que a árvore à esquerda na~\Vref{fig:rot-simples} seja binária de busca. Isso significa que todas as relações a seguir são verdadeiras(considere que quando falamos sobre uma sub-árvore estejamos falando sobre todos os seus nós):
+      \begin{itemize}
+        \begin{multicols}{2}
+          \item \( T_1 < u \)
+          \item \( u < T_2 \)
+          \item \( u < p \)
+          \item \( p < T_3 \)
+        \end{multicols}
+      \end{itemize}
+
+      E, para que a estrutura após uma rotação à direita (árvore da direita) mantenha a propriedade, precisamos concluir que:
+      \begin{itemize}
+        \begin{multicols}{2}
+          \item \( T_1 < u \)
+          \item \( u < p \)
+          \item \( T_2 < p \)
+          \item \( p < T_3 \)
+        \end{multicols}
+      \end{itemize}
+
+      Mas observe que todas as novas relações podem ser obtidas das anteriores, lembrando que a relação de ``\( < \)'' é transitiva.
+
+      Como os nós na sub-árvore rotacionada mudaram apenas de posição, mas permanecem os mesmos, essa alteração não tem como ter prejudicado a propriedade globalmente na árvore que a contém.
+
+      Por fim, perceba que o caso da rotação simples à esquerda é simétrico ao que acabamos de observar.
+
     \section{Rotações corrigem desbalanceamento}
 
     \section{Conclusão}
