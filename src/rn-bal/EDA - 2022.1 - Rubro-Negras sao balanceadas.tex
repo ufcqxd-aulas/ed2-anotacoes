@@ -168,7 +168,13 @@ Vamos relembrar o nossos conceitos que serão necessários para o resultado a se
 \begin{proof}
 	Seja \( T \) uma Árvore Rubro-Negra de altura-negra \( hn(T) = k \) para um \( k \) arbitrário e considere que \( T \) tenha o menor tamanho \( n \) dentre todas as Rubro-Negras com essa altura-negra.
 
-	Observe que em \( T \) não podem existir nós vermelhos, pois como esses nós não são contados no valor de \( k \), poderíamos substitui-los junto com seus filhos por um nó preto e reduzir o tamanho da árvore em duas unidades para cada nó vermelho sem alterar a altura-negra. % TODO: fazer figura ilustrando.
+	Observe que em \( T \) não podem existir nós vermelhos, pois como esses nós não são contados no valor de \( k \), poderíamos substitui-los junto com seus filhos por um nó preto e reduzir o tamanho da árvore em duas unidades para cada nó vermelho sem alterar a altura-negra. Veja a \Vref{fig:rn-h-min}.
+
+	\begin{figure}[htb]
+		\caption{\label{fig:rn-h-min}}
+		\centering
+		\include{fig-rn-h-min.tex}
+	\end{figure}
 
 	Dessa forma, pela definição de Árvores Rubro-Negras e de altura-negra, como todos os nós devem ser pretos temos que essa árvore deve ser perfeita e, certamente, \( k = hn(T) = O(\lg n) \)\footnote{Como \( k \) é arbitrário, temos que esse resultado é válido para todas as árvores.}.
 \end{proof}

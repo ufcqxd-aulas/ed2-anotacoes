@@ -1,0 +1,62 @@
+\begin{tikzpicture}[transform shape, scale=0.8, baseline=(current bounding box.center)]
+	\begin{scope}[nodes={draw=black, circle, minimum width=2.5ex}, sibling distance=6em, level distance=5ex]
+		\draw node (root) [fill=black] {}
+		child [child anchor=apex] {
+				node [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
+			}
+		child {
+				node (ellipsis) [draw=none] {\( \ddots \)}
+				child { node [draw=none] {} edge from parent [draw=none] }
+				child {
+						node (red node) [fill=red!50] {}
+						child {
+								node [fill=black] {}
+								child [child anchor=apex, sibling distance=3.5em] {
+										node [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
+									}
+								child [child anchor=apex, sibling distance=3.5em] {
+										node [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
+									}
+							}
+						child {
+								node (replacing) [fill=black] {}
+								child [child anchor=apex, sibling distance=3.5em] {
+										node [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
+									}
+								child [child anchor=apex, sibling distance=3.5em] {
+										node (rightmost) [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
+									}
+							}
+					}
+			}
+		;
+	\end{scope}
+	\draw [decorate, decoration={brace, amplitude=7pt, raise=1em}] (root.north) -- (ellipsis.south east) node [pos=0.5, above right=2em] {\( x \) nós pretos};
+	\draw [decorate, decoration={brace, amplitude=7pt, raise=1.5em}]  (red node.north -| rightmost.south) -- (rightmost.south) node [pos=0.5, right=3em] {\( y \) nós pretos};
+\end{tikzpicture}
+\begin{tikzpicture}
+	\draw node [minimum width=3em] {\( \Longrightarrow \)};
+\end{tikzpicture}
+\begin{tikzpicture}[transform shape, scale=0.8, baseline=(current bounding box.center)]\begin{scope}[nodes={draw=black, circle, minimum width=2.5ex}, sibling distance=6em, level distance=5ex]
+		\draw node (root) [fill=black] {}
+		child [child anchor=apex] {
+				node [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
+			}
+		child {
+				node (ellipsis) [draw=none] {\( \ddots \)}
+				child { node [draw=none] {} edge from parent [draw=none] }
+				child {
+						node (replacing) [fill=black] {}
+						child [child anchor=apex, sibling distance=3.5em] {
+								node [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
+							}
+						child [child anchor=apex, sibling distance=3.5em] {
+								node (rightmost) [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
+							}
+					}
+			}
+		;
+	\end{scope}
+	\draw [decorate, decoration={brace, amplitude=7pt, raise=1em}] (root.north) -- (ellipsis.south east) node [pos=0.5, above right=2em] {\( x \) nós pretos};
+	\draw [decorate, decoration={brace, amplitude=7pt, raise=1.5em}]  (replacing.north -| rightmost.south) -- (rightmost.south) node [pos=0.5, right=3em] {\( y \) nós pretos};
+\end{tikzpicture}
