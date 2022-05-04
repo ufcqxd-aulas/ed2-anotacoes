@@ -54,7 +54,10 @@
 
 \usepackage{amsthm}
 
-  \newtheorem{proposition}{Proposição}[section]
+  \newtheorem{theorem}{Teorema}[section]
+  \newtheorem{proposition}[theorem]{Proposição}
+  \newtheorem{lemma}[theorem]{Lema}
+  \newtheorem{corollary}[theorem]{Corolário}
   \theoremstyle{definition}
   \newtheorem{definition}{Definição}[section]
 
@@ -115,6 +118,10 @@
 Vamos relembrar o nossos conceitos que serão necessários para o resultado a ser demonstrado:
 
 \begin{definition}
+	O \emph{tamanho} de uma árvore é a sua quantidade de nós.
+\end{definition}
+
+\begin{definition}
 	Uma árvore binária \( T \), com \( n \) nós, tal que \( h(T) = O(\lg n) \) é dita \emph{balanceada}.
 \end{definition}
 
@@ -149,7 +156,21 @@ Vamos relembrar o nossos conceitos que serão necessários para o resultado a se
 	A argumentação abaixo não é baseada na que consta em~\textcite{Szwarcfiter2010} nem em~\textcite{Cormen2009}.
 \end{framed}
 
+\begin{lemma}
+	Uma árvore Rubro-Negra \( T \) de tamanho \( n \) \emph{mínimo} é tal que \( hn(T) = O(\lg n) \).
+\end{lemma}
 
+\begin{corollary}
+	Uma árvore Rubro-Negra \( T \) qualquer de tamanho \( n \) \emph{qualquer} é tal que \( hn(T) = O(\lg n) \).
+\end{corollary}
+
+\begin{lemma}
+	Para uma árvore Rubro-Negra \( T \) qualquer, \( h(T) \leq 2 hn(T) \).
+\end{lemma}
+
+\begin{theorem}
+	Árvores Rubro-Negras são balanceadas.
+\end{theorem}
 
 \printbibliography
 
