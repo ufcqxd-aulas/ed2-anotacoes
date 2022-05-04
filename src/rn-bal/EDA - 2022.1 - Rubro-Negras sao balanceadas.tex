@@ -77,6 +77,12 @@
 \usepackage[brazil]{varioref}
 \usepackage[brazilian]{cleveref}
 
+  % !FIXME: Corrigir nome automático dos ambientes a seguir
+  \crefname{definition}{Definição}{Definições}
+  \crefname{lemma}{Lema}{Lemas}
+  \crefname{corollary}{Corolário}{Corolários}
+
+  % !FIXME: Mover bloco a seguir para final do preâmbulo
   \def\disciplinacodigotext{QXD0115}
   \def\disciplinanometext{Estrutura de Dados Avançada}
   \def\semestretext{2022.1}
@@ -143,7 +149,7 @@ Vamos relembrar o nossos conceitos que serão necessários para o resultado a se
 \end{definition}
 
 \begin{definition}
-	A \emph{altura em negros} (ou \emph{altura negra}) de um nó \( n \) de uma árvore Rubro-Negra, denotada por \( hn(n) \), é a quantidade de nós pretos em um caminho descendente de \( n \) a uma das suas folhas.
+	A \emph{altura em negros} (ou \emph{altura-negra}) de um nó \( n \) de uma árvore Rubro-Negra, denotada por \( hn(n) \), é a quantidade de nós pretos em um caminho descendente de \( n \) a uma das suas folhas.
 
 	A altura em negros de uma árvore \( T \), denotada por \( hn(T) \), é a altura em negros de sua raiz.
 \end{definition}
@@ -156,21 +162,39 @@ Vamos relembrar o nossos conceitos que serão necessários para o resultado a se
 	A argumentação abaixo não é baseada na que consta em~\textcite{Szwarcfiter2010} nem em~\textcite{Cormen2009}.
 \end{framed}
 
-\begin{lemma}
+\begin{lemma} \label{res:hn-min-lgn}
 	Uma árvore Rubro-Negra \( T \) de tamanho \( n \) \emph{mínimo} é tal que \( hn(T) = O(\lg n) \).
 \end{lemma}
+\begin{proof}
+	Seja \( T \) uma Árvore Rubro-Negra de altura-negra \( hn(T) = k \) para um \( k \) arbitrário e considere que \( T \) tenha o menor tamanho \( n \) dentre todas as Rubro-Negras com essa altura-negra.
+
+	Observe que em \( T \) não podem existir nós vermelhos, pois como esses nós não são contados no valor de \( k \), poderíamos substitui-los junto com seus filhos por um nó preto e reduzir o tamanho da árvore em duas unidades para cada nó vermelho sem alterar a altura-negra. % TODO: fazer figura ilustrando.
+
+	Dessa forma, pela definição de Árvores Rubro-Negras e de altura-negra, como todos os nós devem ser pretos temos que essa árvore deve ser perfeita e, certamente, \( k = hn(T) = O(\lg n) \)\footnote{Como \( k \) é arbitrário, temos que esse resultado é válido para todas as árvores.}.
+\end{proof}
 
 \begin{corollary}
 	Uma árvore Rubro-Negra \( T \) qualquer de tamanho \( n \) \emph{qualquer} é tal que \( hn(T) = O(\lg n) \).
 \end{corollary}
+\begin{proof}
+	Considere \( T \) e \( T^\prime \) como árvores Rubro-Negras de mesma altura-negra, sendo \( T \) de tamanho \( n \) mínimo e \( T^\prime \) de tamanho \( n^\prime \). Certamente \( n \leq n^\prime \) e por isso \( \lg n \leq \lg n^\prime \implies \lg n = O(\lg n^\prime) \). Como, pelo Lema~\ref{res:hn-min-lgn}, \( hn(T) = O(\lg n) \), temos que \( hn(T^\prime) = hn(T) = O(\lg n) = O(\lg n^\prime) \).
+\end{proof}
 
 \begin{lemma}
 	Para uma árvore Rubro-Negra \( T \) qualquer, \( h(T) \leq 2 hn(T) \).
 \end{lemma}
+\begin{proof}
+	Considere \( T^\prime \) Rubro-Negra com altura-negra \( k \), com \( k \) arbitrário, e altura máxima \( h_{max} \). Perceba que uma Rubro-Negra não pode ter altura máxima quando o seu caminho mais comprido da raiz a alguma folha\footnote{Esse é o caminho que determina a altura da árvore.} possui ao menos um nó preto que seja pai de outro nó preto, pois podemos adicionar um nó vermelho entre esses\footnote{junto com alguns outros nós para completar a outra sub-árvore desse nó vermelho.} e aumentar a altura da árvore sem alterar sua altura-negra.
+
+	Assim, em \( T^\prime \) o maior caminho certamente é constituído de uma alternância entre nós pretos e vermelhos. A quantidade de nós nesse caminho é igual a \( h_{max} \) porém apenas metade (aproximadamente) deles são contados para \( k \). Assim, temos que \( h_{max} = 2 k \). Então, dada uma Rubro-Negra \( T \) qualquer com \( hn(T) = k \), temos que \( h(T) \leq h(T^\prime) = h_{max} \), pela escolha de \( T^\prime \) e daí concluímos que \( h(T) \leq 2k = 2hn(T) \)\footnote{Como \( k \) é arbitrário, temos que esse resultado é válido para todas as árvores.}.
+\end{proof}
 
 \begin{theorem}
 	Árvores Rubro-Negras são balanceadas.
 \end{theorem}
+\begin{proof}
+	Como para qualquer Rubro-Negra \( T \) temos \( h(T) \leq 2 hn(T) \) e \( hn(T) = O(\lg n) \), temos que \( h(T) = O(\lg n) \).
+\end{proof}
 
 \printbibliography
 
