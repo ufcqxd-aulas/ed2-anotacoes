@@ -21,7 +21,7 @@
 						child {
 								node (replacing) [fill=black] {}
 								child [child anchor=apex, sibling distance=3.5em] {
-										node [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
+										node (left) [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
 									}
 								child [child anchor=apex, sibling distance=3.5em] {
 										node (rightmost) [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
@@ -31,8 +31,10 @@
 			}
 		;
 	\end{scope}
-	\draw [decorate, decoration={brace, amplitude=7pt, raise=1em}] (root.north) -- (ellipsis.south east) node [pos=0.5, above right=2em] {\( x \) nós pretos};
+	% * NOTE ellipsis.340 => apenas para a chave ficar mais paralela
+	\draw [decorate, decoration={brace, amplitude=7pt, raise=1em}] (root.north) -- (ellipsis.340) node [pos=0.5, above right=2em] {\( x \) nós pretos};
 	\draw [decorate, decoration={brace, amplitude=7pt, raise=1.5em}]  (red node.north -| rightmost.south) -- (rightmost.south) node [pos=0.5, right=3em] {\( y \) nós pretos};
+	\draw [dashed, draw=black!50] ($(replacing.north) + (90:1em)$) -- ($(left.left corner) + (205:1em)$) -- ($(rightmost.right corner) + (335:1em)$) -- cycle;
 \end{tikzpicture}
 \begin{tikzpicture}
 	\draw node [minimum width=3em] {\( \Longrightarrow \)};
@@ -48,7 +50,7 @@
 				child {
 						node (replacing) [fill=black] {}
 						child [child anchor=apex, sibling distance=3.5em] {
-								node [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
+								node (left) [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
 							}
 						child [child anchor=apex, sibling distance=3.5em] {
 								node (rightmost) [isosceles triangle, shape border rotate=90, anchor=apex, minimum width=2em] {}
@@ -57,6 +59,8 @@
 			}
 		;
 	\end{scope}
-	\draw [decorate, decoration={brace, amplitude=7pt, raise=1em}] (root.north) -- (ellipsis.south east) node [pos=0.5, above right=2em] {\( x \) nós pretos};
+	% * NOTE ellipsis.340 => apenas para a chave ficar mais paralela
+	\draw [decorate, decoration={brace, amplitude=7pt, raise=1em}] (root.north) -- (ellipsis.340) node [pos=0.5, above right=2em] {\( x \) nós pretos};
 	\draw [decorate, decoration={brace, amplitude=7pt, raise=1.5em}]  (replacing.north -| rightmost.south) -- (rightmost.south) node [pos=0.5, right=3em] {\( y \) nós pretos};
+	\draw [dashed, draw=black!50] ($(replacing.north) + (90:1em)$) -- ($(left.left corner) + (205:1em)$) -- ($(rightmost.right corner) + (335:1em)$) -- cycle;
 \end{tikzpicture}
