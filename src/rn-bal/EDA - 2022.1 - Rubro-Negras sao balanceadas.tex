@@ -190,7 +190,13 @@ Vamos relembrar o nossos conceitos que serão necessários para o resultado a se
 	Para uma árvore Rubro-Negra \( T \) qualquer, \( h(T) \leq 2 hn(T) \).
 \end{lemma}
 \begin{proof}
-	Considere \( T^\prime \) Rubro-Negra com altura-negra \( k \), com \( k \) arbitrário, e altura máxima \( h_{max} \). Perceba que uma Rubro-Negra não pode ter altura máxima quando o seu caminho mais comprido da raiz a alguma folha\footnote{Esse é o caminho que determina a altura da árvore.} possui ao menos um nó preto que seja pai de outro nó preto, pois podemos adicionar um nó vermelho entre esses\footnote{junto com alguns outros nós para completar a outra sub-árvore desse nó vermelho.} e aumentar a altura da árvore sem alterar sua altura-negra.
+	Considere \( T^\prime \) Rubro-Negra com altura-negra \( k \), com \( k \) arbitrário, e altura máxima \( h_{max} \). Perceba que uma Rubro-Negra não pode ter altura máxima quando o seu caminho mais comprido da raiz a alguma folha\footnote{Esse é o caminho que determina a altura da árvore.} possui ao menos um nó preto que seja pai de outro nó preto, pois podemos adicionar um nó vermelho entre esses\footnote{junto com alguns outros nós para completar a outra sub-árvore desse nó vermelho.} e aumentar a altura da árvore sem alterar sua altura-negra. Veja a \Vref{fig:rn-h-max}.
+
+	\begin{figure}[htb]
+		\caption{\label{fig:rn-h-max}}
+		\centering
+		\include{fig-rn-h-max.tex}
+	\end{figure}
 
 	Assim, em \( T^\prime \) o maior caminho certamente é constituído de uma alternância entre nós pretos e vermelhos. A quantidade de nós nesse caminho é igual a \( h_{max} \) porém apenas metade (aproximadamente) deles são contados para \( k \). Assim, temos que \( h_{max} = 2 k \). Então, dada uma Rubro-Negra \( T \) qualquer com \( hn(T) = k \), temos que \( h(T) \leq h(T^\prime) = h_{max} \), pela escolha de \( T^\prime \) e daí concluímos que \( h(T) \leq 2k = 2hn(T) \)\footnote{Como \( k \) é arbitrário, temos que esse resultado é válido para todas as árvores.}.
 \end{proof}
