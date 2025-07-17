@@ -136,7 +136,7 @@ Vamos relembrar o nossos conceitos que serão necessários para o resultado a se
 
 Note que, se mostrarmos que a altura de uma árvore AVL \ul{qualquer} sempre é dada no máximo por uma função logarítmica do seu tamanho, poderemos concluir que a ordem de grandeza da altura não pode ser maior que logarítmica. Isso é exatamente o que significa, considerando \( h \) sendo a altura e \( n \) sendo o tamanho, que \( h = O(\lg n) \) e, com isso, que toda AVL seria balanceada.
 
-Nesse sentido, uma das formas possíveis é se conseguirmos construir uma desigualdade da forma \( h \leq c \cdot k + \lg n \) para constantes \( c \) e \( k \), com \( c > 0 \). A estratégia que seguiremos será um pouco mais restrita, porém permitirá concluirmos a mesma coisa.
+Nesse sentido, uma das formas possíveis é se conseguirmos construir uma desigualdade da forma \( h \leq k + c \cdot \lg n \) para constantes \( c \) e \( k \), com \( c > 0 \). A estratégia que seguiremos será um pouco mais restrita, porém permitirá concluirmos a mesma coisa.
 
 Em vez de analisarmos uma árvore qualquer, vamos observar, para um dado \( h \) arbitrário, uma árvore AVL com altura \( h \) que contenha o mínimo possível de nós. Se essa árvore respeitar a desigualdade anterior, poderemos concluir que \emph{todas} as AVL com essa mesma altura também a respeitarão\footnote{Pois já que para essa tal árvore ``mínima'' o lado direito da desigualdade é o menor possível, todas as outras apresentarão valores ainda maiores, o que mantém a desigualdade.}.
 
